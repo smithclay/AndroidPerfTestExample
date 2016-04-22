@@ -48,10 +48,10 @@ android {
 
     productFlavors {
         prod {
-            buildConfigField "String", "NEWRELIC_TOKEN", "AA86306d05a11be432d9edc83985f86c8e1656bb38"
+            buildConfigField "String", "NEWRELIC_TOKEN", "\"AA86306d05a11be432d9edc83985f86c8e1656bb38\""
         }
         zPref {
-            buildConfigField "String", "NEWRELIC_TOKEN", "AA3bb1c6bf2fb0ed555cd7f7149dc9e83d7032343a"
+            buildConfigField "String", "NEWRELIC_TOKEN", "\"AA3bb1c6bf2fb0ed555cd7f7149dc9e83d7032343a\""
         }
     }
 
