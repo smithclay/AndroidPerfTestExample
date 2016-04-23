@@ -8,4 +8,5 @@ jdk:
 android:
   components:
     - build-tools-23
+    - build-tools-24
     - android-23
