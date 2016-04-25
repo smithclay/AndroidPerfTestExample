@@ -2,20 +2,23 @@
 Android NetworkConnect Sample + New Relic Monitoring + AWS Device Farm
 ===================================
 
+[![Build Status](https://travis-ci.org/smithclay/AndroidPerfTestExample.svg?branch=master)](https://travis-ci.org/smithclay/AndroidPerfTestExample)
+
 This sample demonstrates how to connect to the network and fetch raw HTML using
 HttpURLConnection. AsyncTask is used to perform the fetch on a background thread.
 
-New Relic is also installed along with the AWS Device Farm for automated performance testing.
+New Relic is also installed along with the AWS Device Farm for automated testing.
 
 ### Pre-requisites
 
 - Android SDK v23
 - Android Build Tools v24.0.0 rc3
 - Android Support Repository
+- TravisCI account
 - [New Relic](https://www.newrelic.com) Account
 - Amazon Web Services Account
 
-### Screenshots
+### Screenshot
 
 <img src="screenshots/main.png" height="400" alt="Screenshot"/> 
 
@@ -67,33 +70,22 @@ devicefarm {
 
 ```
 
-### Use CloudTrail for Device Farm Logging (optional)
+### There are two flavors
+
+Build flavors are used to send test data to another New Relic application (and not pollute production data with testing):
 
 ```
-aws cloudtrail create-subscription --name CloudTrailTest --s3-new-bucket cloud-trail-test.clay.fail --sns-new-topic CloudTrailTopic
+    productFlavors {
+        prod {
+            buildConfigField "String", "NEWRELIC_TOKEN", "\"AA86306d05a11be432d9edc83985f86c8e1656bb38\""
+        }
+        zPref {
+            buildConfigField "String", "NEWRELIC_TOKEN", "\"AA3bb1c6bf2fb0ed555cd7f7149dc9e83d7032343a\""
+        }
+    }
 ```
 
-### Connect the SNS Topic to an AWS Lambda Function (optional)
-
-Create a Node.js lambda function attached to a role with execution access (to see, `aws iam list-roles`):
-
-```
-aws lambda create-function --function-name cloudtrail-lambda --runtime nodejs --role arn:aws:iam::156280089524:role/lambda_default --handler SNSLambdaProcessor.handler --zip-file fileb://$(pwd)/SNSLambdaProcessor.zip
-```
-
-Get the ARN of the SNS topic that will receive the CloudTrail events:
-
-```
-aws sns list-topics
-```
-
-Using the SNS topic name and the lambda function ARN, create a subscription to invoke the function:
-
-```
-aws sns subscribe --topic-arn arn:aws:sns:us-west-2:156280089524:CloudTrailTopic --protocol lambda --notification-endpoint arn:aws:lambda:us-west-2:156280089524:function:cloudtrail-lambda
-```
-
-### Run 
+### Run on DeviceFarm (Environment variables `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` must be set)
 
 ```
 ./gradlew devicefarmUpload

@@ -20,4 +20,5 @@ android:
     - extra-android-m2repository
     - build-tools-23.0.3
     - build-tools-24.0.0-preview
-script: ./gradlew assembleDebug
+# Upload zPerf flavor to DeviceFarm for testing.
+script: ./gradlew devicefarmUploadZPrefDebug
