@@ -20,7 +20,9 @@ New Relic is also installed along with the AWS Device Farm for automated testing
 
 ### Screenshot
 
-<img src="screenshots/main.png" height="400" alt="Screenshot"/> 
+<img src="screenshots/architecture.png" height="400" alt="Use all the SaSS"/>
+
+<img src="screenshots/main.png" height="400" alt="Screenshot"/>
 
 ### Getting Started
 
