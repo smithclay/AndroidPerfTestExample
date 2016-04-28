@@ -73,6 +73,11 @@ public class MainActivity extends FragmentActivity {
         // Expose build options to New Relic
         NewRelic.setAttribute("buildType", BuildConfig.BUILD_TYPE);
         NewRelic.setAttribute("versionCode", BuildConfig.VERSION_CODE);
+
+        try {
+            Thread.sleep(1000);
+        } catch (Exception e) {
+        }
     }
 
     @Override
